@@ -8,51 +8,48 @@ import jakarta.persistence.EntityManager;
 import br.edu.br.meuprimeirospringboot.entity.Aluno;
 
 @Repository
-public class AlunosCustimReoository {
-	
+public class AlunosCustomRepository {
+
 	private EntityManager em;
 
-	public AlunosCustimReoository(EntityManager em) {
+	public AlunosCustomRepository(EntityManager em) {
 		super();
 		this.em = em;
 	}
-	
-	public List<Aluno> findAllCustom(Long id, String nome, String email){
+
+	public List<Aluno> findAllCustom(Long id, String nome, String email) {
 		String query = "select a from Aluno a ";
 		String condicao = "where ";
-		
+
 		if (id != null) {
 			query += condicao + "a.id = :id";
 			condicao = " and ";
 		}
-		
+
 		if (nome != null) {
 			query += condicao + "a.nome = :nome";
 			condicao = " and ";
 		}
-		
+
 		if (email != null) {
 			query += condicao + "a.email = :email";
 		}
-		
-		var q = em.createQuery(query,Aluno.class);
-		
+
+		var q = em.createQuery(query, Aluno.class);
+
 		if (id != null) {
-			q.setParameter("id",id);
+			q.setParameter("id", id);
 		}
-		
+
 		if (nome != null) {
 			q.setParameter("nome", nome);
 		}
-		
+
 		if (email != null) {
 			q.setParameter("email", email);
 		}
-		
-		
+
 		return q.getResultList();
 	}
-	
-	
 
 }
