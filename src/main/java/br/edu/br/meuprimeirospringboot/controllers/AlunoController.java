@@ -9,48 +9,47 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.br.meuprimeirospringboot.entity.Aluno;
-import br.edu.br.meuprimeirospringboot.serviceImpl.AlunoServiceImpl;
+import br.edu.br.meuprimeirospringboot.services.AlunoService;
 
 @Controller
 @RequestMapping("/alunos")
 public class AlunoController {
 	@Autowired
-	private AlunoServiceImpl aluno;
-	
+	private AlunoService aluno;
+
 	@GetMapping("/listar")
-	String ListarAlunos(ModelMap model){
+	String ListarAlunos(ModelMap model) {
 		model.addAttribute("alunos", aluno.buscarTodos());
 		return "/aluno/lista";
-	}	
-	
+	}
+
 	@GetMapping("/cadastrar")
-	String CadastrarAlunos(ModelMap model){
-		model.addAttribute("aluno",new Aluno());
+	String CadastrarAlunos(ModelMap model) {
+		model.addAttribute("aluno", new Aluno());
 		return "/aluno/cadastro";
 	}
-	
+
 	@PostMapping("/salvar")
 	String Salvar(Aluno a) {
 		aluno.cadastrar(a);
 		return "redirect:/alunos/listar";
 	}
-	
+
 	@GetMapping("/excluir/{id}")
 	String excluir(@PathVariable("id") Long id) {
 		aluno.excluirPorId(id);
-		return "redirect:/alunos/listar";	
+		return "redirect:/alunos/listar";
 	}
-	
-	
+
 	@GetMapping("/editar/{id}")
 	String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("aluno",aluno.buscarPorId(id));
+		model.addAttribute("aluno", aluno.buscarPorId(id));
 		return "/aluno/cadastro";
 	}
-	
+
 	@PostMapping("/editar")
 	String editar(Aluno a) {
 		aluno.editar(a);
-		return "redirect:/alunos/listar";	
+		return "redirect:/alunos/listar";
 	}
 }

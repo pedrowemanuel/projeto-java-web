@@ -1,4 +1,4 @@
-package br.edu.br.meuprimeirospringboot.serviceImpl;
+package br.edu.br.meuprimeirospringboot.services;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import br.edu.br.meuprimeirospringboot.entity.Aluno;
 import br.edu.br.meuprimeirospringboot.repository.AlunoRepository;
-import br.edu.br.meuprimeirospringboot.service.AlunoService;
+import br.edu.br.meuprimeirospringboot.services.interfaces.GenericService;
 
 @Service
-public class AlunoServiceImpl implements AlunoService {
+public class AlunoService implements GenericService<Aluno> {
 	@Autowired
 	private AlunoRepository aluno;
 
@@ -39,7 +39,10 @@ public class AlunoServiceImpl implements AlunoService {
 		Aluno al = this.buscarPorId(a.getId());
 		al.setNome(a.getNome());
 		al.setEmail(a.getEmail());
+		al.setCpf(a.getCpf());
 		al.setMatricula(a.getMatricula());
+		al.setDtNascimento(a.getDtNascimento());
+
 		return aluno.save(al);
 	}
 }

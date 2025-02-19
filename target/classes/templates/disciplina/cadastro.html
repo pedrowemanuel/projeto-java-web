@@ -2,42 +2,43 @@
 <html lang="pt" th:replace="~{layout :: layout}">
   <main th:fragment="content">
     <div class="container" id="form-cadastro">
-      <a class="text-dark" href="/alunos/listar" role="button">
+      <a class="text-dark" href="/disiciplinas/listar" role="button">
         <span
           class="oi oi-spreadsheet"
           title="Cadastro"
           aria-hidden="true"
         ></span>
-        <span>Listar Alunos</span>
+        <span>Listar Disiciplinas</span>
       </a>
       <hr class="mb-5" />
 
-      <h3>Aluno</h3>
+      <h3>Disiciplina</h3>
 
       <form
-        th:action=" ${aluno.id == null} ? @{/alunos/salvar} : @{/alunos/editar}"
+        th:action=" ${disiciplina.id == null} ? @{/disiciplinas/salvar} : @{/disiciplinas/editar}"
         method="POST"
-        th:object="${aluno}"
+        th:object="${disiciplina}"
       >
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="nome">Nome do Aluno</label>
+            <label for="nome">Nome da Disiciplina</label>
             <input
               type="text"
               class="form-control"
               id="nome"
-              placeholder="Nome Completo"
+              placeholder="Nome"
               th:field="*{nome}"
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="email">E-mail</label>
+            <label for="codigo">Código</label>
             <input
-              type="email"
+              type="text"
               class="form-control"
-              id="email"
-              placeholder="E-mail"
-              th:field="*{email}"
+              id="codigo"
+              placeholder="Código"
+              th:field="*{codigo}"
+              maxlength="20"
             />
           </div>
           <div class="form-group col-md-6">

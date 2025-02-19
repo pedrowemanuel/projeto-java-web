@@ -1,16 +1,16 @@
 package br.edu.br.meuprimeirospringboot.entity;
 
 import java.util.Date;
-
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.Period;
+import org.springframework.format.annotation.DateTimeFormat;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 
 @Entity
@@ -19,23 +19,23 @@ public class Aluno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@Column(nullable = false, length = 100)
 	private String nome;
+
+	@Column(unique = true, length = 50, nullable = false)
 	private String matricula;
+
 	private String email;
+
+	@Column(unique = true, length = 14, nullable = false)
 	private String cpf;
 
-	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dtNascimento;
 
 	@Transient
 	private int idade;
-
-	// @OneToOne(cascade = CascadeType.ALL)
-	// private Endereco e;
-
-	// @OneToMany(fetch = FetchType.EAGER, mappedBy = "aluno", cascade =
-	// CascadeType.ALL)
-	// private List<Telefone> telefones = new ArrayList<Telefone>();
 
 	public Long getId() {
 		return id;
@@ -75,10 +75,17 @@ public class Aluno {
 
 	public void setDtNascimento(Date dtNascimento) {
 		this.dtNascimento = dtNascimento;
+
 	}
 
 	public int getIdade() {
-		return idade;
+		if (dtNascimento != null) {
+			LocalDate birthDate = dtNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate currentDate = LocalDate.now();
+			return Period.between(birthDate, currentDate).getYears();
+		}
+
+		return 0;
 	}
 
 	public void setIdade(int idade) {
@@ -92,5 +99,4 @@ public class Aluno {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 }
