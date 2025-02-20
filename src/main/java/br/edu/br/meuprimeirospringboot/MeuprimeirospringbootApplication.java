@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.edu.br.meuprimeirospringboot.entity.Aluno;
 import br.edu.br.meuprimeirospringboot.repository.AlunoRepository;
 import br.edu.br.meuprimeirospringboot.repository.AlunosCustomRepository;
-import br.edu.br.meuprimeirospringboot.repository.ProfessorRepository;
+// import br.edu.br.meuprimeirospringboot.repository.ProfessorRepository;
 import br.edu.br.meuprimeirospringboot.services.AlunoService;
 
 @SpringBootApplication
