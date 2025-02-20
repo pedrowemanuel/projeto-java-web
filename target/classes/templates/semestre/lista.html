@@ -15,6 +15,7 @@
             <tr>
               <th>#</th>
               <th>Ano</th>
+              <th>Semestre</th>
               <th>Início</th>
               <th>Fim</th>
               <th>Ação</th>
@@ -24,6 +25,7 @@
             <tr th:each="semestre : ${semestres}">
               <td th:text="${semestre.id}"></td>
               <td th:text="${semestre.ano}"></td>
+              <td th:text="${semestre.semestre}"></td>
               <td th:text="${semestre.inicio}"></td>
               <td th:text="${semestre.fim}"></td>
               <td colspan="2">

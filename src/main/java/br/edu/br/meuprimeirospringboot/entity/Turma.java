@@ -17,6 +17,9 @@ public class Turma {
 	private Long id;
 
 	@Column(nullable = false)
+	private String descricao;
+
+	@Column(nullable = false)
 	private String horario;
 
 	private String professor;
@@ -55,6 +58,14 @@ public class Turma {
 
 	public void setSemestre(Semestre semestre) {
 		this.semestre = semestre;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 }

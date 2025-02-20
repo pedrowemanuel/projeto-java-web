@@ -20,11 +20,11 @@ public class Semestre {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(nullable = false, length = 4)
-	private int ano;
-
 	@Column(length = 1, nullable = false)
 	private int semestre;
+
+	@Column(nullable = false, length = 4)
+	private int ano = java.time.Year.now().getValue();
 
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

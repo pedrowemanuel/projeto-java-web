@@ -2,34 +2,32 @@
 <html lang="pt" th:replace="~{layout :: layout}">
   <main th:fragment="content">
     <div class="container">
-      <a class="text-dark" href="/disciplinas/cadastrar" role="button">
+      <a class="text-dark" href="/turmas/cadastrar" role="button">
         <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
         <span>Cadastrar</span>
       </a>
       <hr class="mb-5" />
 
-      <h3>Disciplinas</h3>
+      <h3>Turmas</h3>
       <div class="table-responsive">
         <table class="table table-striped table-hover table-sm">
           <thead>
             <tr>
               <th>#</th>
-              <th>Nome</th>
-              <th>Código</th>
-              <th>Carga Horária</th>
+              <th>Descrição</th>
+              <th>Horário</th>
               <th>Ação</th>
             </tr>
           </thead>
           <tbody>
-            <tr th:each="disciplina : ${disciplinas}">
-              <td th:text="${disciplina.id}"></td>
-              <td th:text="${disciplina.nome}"></td>
-              <td th:text="${disciplina.codigo}"></td>
-              <td th:text="${disciplina.cargaHoraria}"></td>
+            <tr th:each="turma : ${turmas}">
+              <td th:text="${turma.id}"></td>
+              <td th:text="${turma.descricao}"></td>
+              <td th:text="${turma.horario}"></td>
               <td colspan="2">
                 <a
                   class="btn btn-info btn-sm"
-                  th:href="@{/disciplinas/editar/{id} (id=${disciplina.id})}"
+                  th:href="@{/turmas/editar/{id} (id=${turma.id})}"
                   role="button"
                 >
                   <span
@@ -41,7 +39,7 @@
 
                 <a
                   class="btn btn-danger btn-sm"
-                  th:href="@{/disciplinas/excluir/{id} (id=${disciplina.id})} "
+                  th:href="@{/turmas/excluir/{id} (id=${turma.id})} "
                   role="button"
                 >
                   <span

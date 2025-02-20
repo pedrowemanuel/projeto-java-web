@@ -2,70 +2,74 @@
 <html lang="pt" th:replace="~{layout :: layout}">
   <main th:fragment="content">
     <div class="container" id="form-cadastro">
-      <a class="text-dark" href="/disciplinas/listar" role="button">
+      <a class="text-dark" href="/turmas/listar" role="button">
         <span
           class="oi oi-spreadsheet"
           title="Cadastro"
           aria-hidden="true"
         ></span>
-        <span>Listar Disciplinas</span>
+        <span>Listar Turmas</span>
       </a>
       <hr class="mb-5" />
 
-      <h3>Disciplina</h3>
+      <h3>Turma</h3>
 
       <form
-        th:action=" ${disciplina.id == null} ? @{/disciplinas/salvar} : @{/disciplinas/editar}"
+        th:action=" ${turma.id == null} ? @{/turmas/salvar} : @{/turmas/editar}"
         method="POST"
-        th:object="${disciplina}"
+        th:object="${turma}"
       >
         <div class="form-row">
           <div class="form-group col-md-6 my-2">
-            <label for="nome">Nome da Disciplina*</label>
-            <input
-              type="text"
+            <label for="semestre">Semestre*</label>
+            <select
               class="form-control"
-              id="nome"
-              placeholder="Nome"
-              th:field="*{nome}"
+              id="semestre"
+              th:field="*{semestre}"
               required
-            />
+            >
+              <option value="" disabled selected>Selecione o Semestre</option>
+              <option
+                th:each="s : ${semestres}"
+                th:value="${s.id}"
+                th:text="${s.ano} + '.' + ${s.semestre}"
+              ></option>
+            </select>
           </div>
+
           <div class="form-group col-md-6 my-2">
-            <label for="codigo">Código*</label>
+            <label for="descricao">Descrição da Turma*</label>
             <input
               type="text"
               class="form-control"
-              id="codigo"
-              placeholder="Código"
-              th:field="*{codigo}"
-              maxlength="20"
-              required
-            />
-          </div>
-          <div class="form-group col-md-2 my-2">
-            <label for="cargaHoraria">Carga Horária*</label>
-            <input
-              type="number"
-              class="form-control"
-              id="cargaHoraria"
-              placeholder="Ex: 80"
-              th:field="*{cargaHoraria}"
-              min="1"
-              max="200"
+              id="descricao"
+              placeholder="Ex: 1° ANO B"
+              th:field="*{descricao}"
               required
             />
           </div>
 
           <div class="form-group col-md-6 my-2">
-            <label for="ementa">Ementa</label>
-            <textarea
+            <label for="horario">Horário*</label>
+            <input
+              type="text"
               class="form-control"
-              id="ementa"
-              placeholder="Ementa"
-              th:field="*{ementa}"
+              id="horario"
+              placeholder="Ex: 8:00 - 10:00"
+              th:field="*{horario}"
               required
-            ></textarea>
+            />
+          </div>
+
+          <div class="form-group col-md-6 my-2">
+            <label for="professor">Professor</label>
+            <input
+              type="text"
+              class="form-control"
+              id="professor"
+              placeholder="Nome Completo do Professor"
+              th:field="*{professor}"
+            />
           </div>
         </div>
         <input type="hidden" th:field="*{id}" />

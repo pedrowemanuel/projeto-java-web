@@ -33,6 +33,31 @@
               required
             />
           </div>
+          <div class="form-group col-md-2 my-2">
+            <label for="semestre">Semestre*</label>
+            <div>
+              <input
+                type="radio"
+                id="semestre1"
+                name="semestre"
+                th:field="*{semestre}"
+                value="1"
+                required
+              />
+              <label for="semestre1">1°</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="semestre2"
+                name="semestre"
+                th:field="*{semestre}"
+                value="2"
+                required
+              />
+              <label for="semestre2">2°</label>
+            </div>
+          </div>
 
           <div class="form-group col-md-2 my-2">
             <label for="inicio">Início</label>
