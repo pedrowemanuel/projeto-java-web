@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt" th:replace="~{layout :: layout}">
+  <main th:fragment="content">
+    <div class="container" id="form-cadastro">
+      <a class="text-dark" href="/semestres/listar" role="button">
+        <span
+          class="oi oi-spreadsheet"
+          title="Cadastro"
+          aria-hidden="true"
+        ></span>
+        <span>Listar Semestres</span>
+      </a>
+      <hr class="mb-5" />
+
+      <h3>Semestre</h3>
+
+      <form
+        th:action=" ${semestre.id == null} ? @{/semestres/salvar} : @{/semestres/editar}"
+        method="POST"
+        th:object="${semestre}"
+      >
+        <div class="form-row">
+          <div class="form-group col-md-2 my-2">
+            <label for="ano">Ano*</label>
+            <input
+              type="number"
+              class="form-control"
+              id="ano"
+              placeholder="Ex: 2025"
+              th:field="*{ano}"
+              min="2024"
+              maxlength="4"
+              required
+            />
+          </div>
+
+          <div class="form-group col-md-2 my-2">
+            <label for="inicio">Início</label>
+            <input
+              type="date"
+              class="form-control"
+              id="inicio"
+              placeholder="Início"
+              th:field="*{inicio}"
+            />
+          </div>
+
+          <div class="form-group col-md-2 my-2">
+            <label for="fim">Fim</label>
+            <input
+              type="date"
+              class="form-control"
+              id="fim"
+              placeholder="Fim"
+              th:field="*{fim}"
+            />
+          </div>
+        </div>
+        <input type="hidden" th:field="*{id}" />
+        <button type="submit" class="btn btn-warning btn-md mt-3">
+          <span class="oi oi-check" title="Cadastro" aria-hidden="true"></span>
+          Salvar
+        </button>
+      </form>
+    </div>
+  </main>
+</html>
