@@ -14,16 +14,24 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Descrição</th>
+              <th>Semestre</th>
+              <th>Disciplina</th>
               <th>Horário</th>
+              <th>Professor</th>
               <th>Ação</th>
             </tr>
           </thead>
           <tbody>
             <tr th:each="turma : ${turmas}">
               <td th:text="${turma.id}"></td>
-              <td th:text="${turma.descricao}"></td>
+              <td
+                th:text="${turma.semestre.ano} + '.' + ${turma.semestre.semestre}"
+              ></td>
+              <td
+                th:text="${turma.disciplina.codigo} + ' - ' + ${turma.disciplina.nome}"
+              ></td>
               <td th:text="${turma.horario}"></td>
+              <td th:text="${turma.professor}"></td>
               <td colspan="2">
                 <a
                   class="btn btn-info btn-sm"

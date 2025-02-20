@@ -1,15 +1,18 @@
 package br.edu.br.meuprimeirospringboot.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.Period;
 import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -37,6 +40,10 @@ public class Aluno {
 	@Transient
 	private int idade;
 
+	@ManyToMany(mappedBy = "alunos")
+	private List<Turma> turmas;
+
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}
@@ -69,13 +76,20 @@ public class Aluno {
 		this.email = email;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public Date getDtNascimento() {
 		return dtNascimento;
 	}
 
 	public void setDtNascimento(Date dtNascimento) {
 		this.dtNascimento = dtNascimento;
-
 	}
 
 	public int getIdade() {
@@ -84,7 +98,6 @@ public class Aluno {
 			LocalDate currentDate = LocalDate.now();
 			return Period.between(birthDate, currentDate).getYears();
 		}
-
 		return 0;
 	}
 
@@ -92,11 +105,11 @@ public class Aluno {
 		this.idade = idade;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public List<Turma> getTurmas() {
+		return turmas;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
 	}
 }

@@ -1,11 +1,17 @@
 package br.edu.br.meuprimeirospringboot.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -17,9 +23,6 @@ public class Turma {
 	private Long id;
 
 	@Column(nullable = false)
-	private String descricao;
-
-	@Column(nullable = false)
 	private String horario;
 
 	private String professor;
@@ -28,6 +31,16 @@ public class Turma {
 	@JoinColumn(name = "semestre_id", nullable = false)
 	private Semestre semestre;
 
+	@ManyToOne
+	@JoinColumn(name = "disciplina_id", nullable = false)
+	private Disciplina disciplina;
+
+	@ManyToMany
+	@JoinTable(name = "turma_aluno", joinColumns = @JoinColumn(name = "turma_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
+	@JsonIgnore
+	private List<Aluno> alunos;
+
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}
@@ -60,12 +73,20 @@ public class Turma {
 		this.semestre = semestre;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public List<Aluno> getAlunos() {
+		return alunos;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 }

@@ -20,7 +20,7 @@
         th:object="${turma}"
       >
         <div class="form-row">
-          <div class="form-group col-md-6 my-2">
+          <div class="form-group col-md-3 my-2">
             <label for="semestre">Semestre*</label>
             <select
               class="form-control"
@@ -28,7 +28,7 @@
               th:field="*{semestre}"
               required
             >
-              <option value="" disabled selected>Selecione o Semestre</option>
+              <option value="" selected>Selecione o Semestre</option>
               <option
                 th:each="s : ${semestres}"
                 th:value="${s.id}"
@@ -37,16 +37,21 @@
             </select>
           </div>
 
-          <div class="form-group col-md-6 my-2">
-            <label for="descricao">Descrição da Turma*</label>
-            <input
-              type="text"
+          <div class="form-group col-md-3 my-2">
+            <label for="disciplina">Disciplina*</label>
+            <select
               class="form-control"
-              id="descricao"
-              placeholder="Ex: 1° ANO B"
-              th:field="*{descricao}"
+              id="disciplina"
+              th:field="*{disciplina}"
               required
-            />
+            >
+              <option value="" selected>Selecione a disciplina</option>
+              <option
+                th:each="obj : ${disciplinas}"
+                th:value="${obj.id}"
+                th:text="${obj.codigo} + ' - ' + ${obj.nome}"
+              ></option>
+            </select>
           </div>
 
           <div class="form-group col-md-6 my-2">

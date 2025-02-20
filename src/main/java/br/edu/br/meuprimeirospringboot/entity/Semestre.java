@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +37,7 @@ public class Semestre {
 	private Date fim;
 
 	@OneToMany(mappedBy = "semestre")
+	@JsonIgnore
 	private List<Turma> turmas;
 
 	public Long getId() {

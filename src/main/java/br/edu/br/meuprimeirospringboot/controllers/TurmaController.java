@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.br.meuprimeirospringboot.entity.Turma;
+import br.edu.br.meuprimeirospringboot.services.DisciplinaService;
 import br.edu.br.meuprimeirospringboot.services.SemestreService;
 import br.edu.br.meuprimeirospringboot.services.TurmaService;
 
@@ -19,6 +20,8 @@ public class TurmaController {
 	private TurmaService turma;
 	@Autowired
 	private SemestreService semestre;
+	@Autowired
+	private DisciplinaService disciplina;
 
 	@GetMapping("/listar")
 	String ListarAlunos(ModelMap model) {
@@ -31,6 +34,7 @@ public class TurmaController {
 	String CadastrarAlunos(ModelMap model) {
 		model.addAttribute("turma", new Turma());
 		model.addAttribute("semestres", semestre.buscarTodos());
+		model.addAttribute("disciplinas", disciplina.buscarTodos());
 
 		return "/turma/cadastro";
 	}
@@ -51,6 +55,7 @@ public class TurmaController {
 	String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("turma", turma.buscarPorId(id));
 		model.addAttribute("semestres", semestre.buscarTodos());
+		model.addAttribute("disciplinas", disciplina.buscarTodos());
 
 		return "/turma/cadastro";
 	}

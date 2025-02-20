@@ -41,7 +41,7 @@ public class TurmaService implements GenericService<Turma> {
 		object.setSemestre(a.getSemestre());
 		object.setHorario(a.getHorario());
 		object.setProfessor(a.getProfessor());
-		object.setDescricao(a.getDescricao());
+		object.setDisciplina(a.getDisciplina());
 
 		return repository.save(object);
 	}

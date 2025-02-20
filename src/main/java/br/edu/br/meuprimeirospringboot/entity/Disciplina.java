@@ -1,10 +1,15 @@
 package br.edu.br.meuprimeirospringboot.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +30,10 @@ public class Disciplina {
 
 	@Column(nullable = false)
 	private int cargaHoraria;
+
+	@OneToMany(mappedBy = "disciplina")
+	@JsonIgnore
+	private List<Turma> turmas;
 
 	public Long getId() {
 		return id;
@@ -64,6 +73,14 @@ public class Disciplina {
 
 	public void setCargaHoraria(int cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
+	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
 	}
 
 }
